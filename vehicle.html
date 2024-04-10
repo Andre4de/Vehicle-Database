@@ -3,9 +3,10 @@
 
     <head>
         <meta charset="utf-8"/>
-        <title> My Index</title>
+        <title> My Vehicle Database </title>
         <link rel="stylesheet" href="stylesheet.css">
-        <script src="javaScript.js" type="module"></script>
+       
+       
     </head>
 
     <body>
@@ -14,30 +15,32 @@
 
             <div class="header">
 
-                <h1>My Index page</h1>
+                <h1>My Vehicle Database</h1>
 
                     <nav>
                         <ul>
-                            <li><a href="index.html">Index DataBase Page</a>        </li>
-                            <li><a href="people.html">People DataBase Page</a>   
+                            <li><a href="index.html">People Page</a>        
+                            <li>Vehicle Page  
+                            <li><a href="addVehicle.html">Add a Vehicle</a> 
                         </ul>
                     </nav>
             </div>
-
+            
             <div class="sidebar">
                 <h3>Sidebar</h3>
                 <img src="images/cars.jpg">
 
-                <form>
-                    <label for="search">Search:</label>
-                    <input type="search" id="search" name="q" placeholder="Search...">
-                    <button type="submit">Search</button>
+                <form id="vehicleSrchForm">
+                    <label for="vehicleSrchForm">Search for license plate:</label>
+                    <input type="search" id="vehSearch" name="q" placeholder="Search...">
+                    <button type="submit" id="vehicleButt">Search</button>
                 </form>
 
             </div>
 
             <div class="main">
                 <h2>Main</h2>
+                <div id="vehicleMain"></div>
             </div>
 
             <div class="footer">
@@ -45,6 +48,7 @@
             </div>
 
           </div>
+          <script type="module" src="javaScript.js"></script> 
     </body>
 
 </html>
