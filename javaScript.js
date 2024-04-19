@@ -27,6 +27,8 @@ document.getElementById('pplNameForm').addEventListener('submit', async function
     .select('*')
     .eq('Name', srchInput)
     console.log(data[0]);
+
+    divarea.innerHTML = '';
     
     if(data[0] == undefined){
         let p = document.createElement('p');
@@ -68,6 +70,9 @@ document.getElementById('pplLicenseForm').addEventListener('submit', async funct
     .eq('LicenseNumber', srchInput)
     console.log(data[0]);
 
+    divarea.innerHTML = '';
+
+
     if(data[0] == undefined){
         let p = document.createElement('p');
         p.textContent = "No one was found with this license plate.";
@@ -91,12 +96,42 @@ document.getElementById('pplLicenseForm').addEventListener('submit', async funct
    });
 
 
-      //vehicle
-      document.getElementById('vehicleSrchForm').addEventListener('submit', async function (event){
-        event.preventDefault();
-        let srchInput = document.getElementById('vehSearch').value;
-        console.log('You typed: ' + srchInput);
-     
+//vehicle
+document.getElementById('vehicleSrchForm').addEventListener('submit', async function (event){
+event.preventDefault();
+let divarea2 = document.getElementById('vehicleMain');
+let srchInput = document.getElementById('vehSearch').value;
+console.log('You typed: ' + srchInput);
+   
+try{
+   
+    const { data, error } = await supabase
+    .from('Vehicle')
+    .select('*')
+    .eq('Make', srchInput)
+    console.log(data[0]);
+    
+    divarea2.innerHTML = '';
+
+    if(data[0] == undefined){
+        let p = document.createElement('p');
+        p.textContent = "No one was found with this name.";
+        divarea2.appendChild(p);
+        return;
+
+    }
+
+    for(let key in data[0]){
+        let p = document.createElement('p');
+        p.textContent = `${key}:${data[0][key]}`
+        divarea2.appendChild(p);
+
+    }
+
+    }
+    catch (error){
+        console.log(error);
+    }
     
     
         

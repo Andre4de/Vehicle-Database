@@ -39,9 +39,9 @@
 
             </div>
 
-            <div class="main">
+            <div class='main'>
                 <h2>Main</h2>
-                <div id="vehicleMain"></div>
+                <div id='vehicleMain'></div>
             </div>
 
             <div class="footer">
@@ -49,7 +49,59 @@
             </div>
 
           </div>
-          <script src="javaScript.js" type="module" defer></script> 
+          <script type="module" defer>
+
+import { createClient } from
+   'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+// Create a single supabase client for interacting with your database
+
+
+
+
+
+const supabase = createClient('https://ugspricsaeopciltqhlf.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnc3ByaWNzYWVvcGNpbHRxaGxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTIyNTYyMjAsImV4cCI6MjAyNzgzMjIyMH0.tXrrGVvxsy5yKal2ROjrDUNWqHbabRehpfI35-MF1vQ')
+
+document.getElementById('vehicleSrchForm').addEventListener('submit', async function (event){
+event.preventDefault();
+let divarea2 = document.getElementById('vehicleMain');
+let srchInput = document.getElementById('vehSearch').value;
+console.log('You typed: ' + srchInput);
+   
+try{
+   
+    const { data, error } = await supabase
+    .from('People','Vehicles')
+    .select('PersonID')
+    .eq('LicenseNumber', srchInput)
+    console.log(data[0]);
+    
+    divarea2.innerHTML = '';
+
+    if(data[0] == undefined){
+        let p = document.createElement('p');
+        p.textContent = "No one was found with this name.";
+        divarea2.appendChild(p);
+        return;
+
+    }
+
+    for(let key in data[0]){
+        let p = document.createElement('p');
+        p.textContent = `${key}:${data[0][key]}`
+        divarea2.appendChild(p);
+
+    }
+
+    }
+    catch (error){
+        console.log(error);
+    }
+    
+    
+        
+        
+    });
+          </script> 
           
     </body>
 
