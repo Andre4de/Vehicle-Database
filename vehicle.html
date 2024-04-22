@@ -70,9 +70,45 @@ console.log('You typed: ' + srchInput);
 try{
    
     const { data, error } = await supabase
-    .from('People','Vehicles')
-    .select('PersonID')
+    .from('People')
+    .select(`
+    PersonID,
+    Vehicles!inner (
+        OwnerID
+    )
+    `)
     .eq('LicenseNumber', srchInput)
+
+
+// const { data, error } = await supabase
+//   .from('countries')
+//   .select(`
+//     name,
+//     cities!inner (
+//       name
+//     )
+//   `)
+//   .eq('cities.name', 'Bali')
+    
+    
+    
+
+// I am trying to write the equivalent of this in SQL but JavaScript 
+
+// select Make, Model, Colour
+// from People, Vehicles
+// WHERE
+// People.LicenseNumber = 'SG345PQ'
+// AND
+// People.PersonID = Vehicles.OwnerID
+    
+
+
+    // .innerJoin('People', 'OwnerID', 'PersonID');
+  
+ 
+   
+
     console.log(data[0]);
     
     divarea2.innerHTML = '';
@@ -91,7 +127,8 @@ try{
         divarea2.appendChild(p);
 
     }
-
+    if(error)
+    console.log(error);
     }
     catch (error){
         console.log(error);
