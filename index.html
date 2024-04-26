@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US'">
+<html lang="en">
 
     <head>
         <meta charset="utf-8"/>
@@ -12,35 +12,38 @@
 
     <body>
        
-          <div class="container">
+          <div id="container">
+            
+            <!-- <div class="header"> -->
+                <header>
+                
+                    <h1>People Search</h1>
 
-            <div class="header">
+                        <nav>
+                            <ul>
+                                <li><a href="">People Search </a>   
+                                <li><a href="vehicle.html">Vehicle Search</a>   
+                                <li><a href="addVehicle.html">Add a Vehicle</a>  
+                            </ul>
+                        </nav>
+                </header>
 
-                <h1>My People Database</h1>
-
-                    <nav>
-                        <ul>
-                            <li>People Page       
-                            <li><a href="vehicle.html">Vehicle Page</a>   
-                            <li><a href="addVehicle.html">Add a Vehicle</a>  
-                        </ul>
-                    </nav>
-            </div>
-
+            <!-- </div> -->
+            
             <div class="sidebar">
                 <h3>Sidebar</h3>
-                <img src="images/people_img.jpg">
+                <img src="images/people_img.jpg" id="img">
 
                 <form id="pplNameForm">
                     <label for="pplNameForm">Search by driver name:</label>
-                    <input type="search" id="pplSearch" name="q" placeholder="Search...">
-                    <button type="submit" id="submitButton1">Search</button> 
+                    <input type="search" id='name' name="q" placeholder="Search...">
+                    <button type="submit" id="submitButton1">Submit</button> 
                 </form>
 
                 <form id="pplLicenseForm">
                     <label for="pplLicenseForm">Search by driver license:</label>
-                    <input type="search" id="pplLicSearch" name="z" placeholder="Search...">
-                    <button type="submit" id="submitButton2">Search</button> 
+                    <input type="search" id="license" name="z" placeholder="Search...">
+                    <button type="submit" id="submitButton2">Submit</button> 
                 </form>
 
               
@@ -53,13 +56,15 @@
 
             <div class="main">
                 <h2>Main</h2>
-                <div id='searchResults'></div>
+                <div id='results'></div>
+                
             </div>
 
             
 
             <div class="footer">
                 <h4>Footer</h4>
+                <div id="message"></div>
             </div>
 
           </div>
@@ -81,11 +86,19 @@ const supabase = createClient('https://ugspricsaeopciltqhlf.supabase.co', 'eyJhb
 
 
 document.getElementById('pplNameForm').addEventListener('submit', async function (event){
-    event.preventDefault();
-    let divarea = document.getElementById('searchResults');
-    let srchInput = document.getElementById('pplSearch').value;
+    // event.preventDefault();
+    let results = document.getElementById('results');
+    let srchInput = document.getElementById('name').value;
+    let message = document.getElementById('message');
     console.log('You typed: ' + srchInput);
  
+    if(srchInput == ''){
+        message.innerHTML = '';
+        message.innerHTML = 'Error';
+        return
+    }
+
+
     try{
    
     const { data, error } = await supabase
@@ -94,12 +107,16 @@ document.getElementById('pplNameForm').addEventListener('submit', async function
     .eq('Name', srchInput)
     console.log(data[0]);
 
-    divarea.innerHTML = '';
+    results.innerHTML = '';
+    
     
     if(data[0] == undefined){
         let p = document.createElement('p');
-        p.textContent = "No one was found with this name.";
-        divarea.appendChild(p);
+        p.textContent = 'No one was found with this name.';
+        results.appendChild(p);
+        let q = document.createElement('q')
+        message.innerHTML = '';
+        message.innerHTML = 'Error'
         return;
 
     }
@@ -107,13 +124,18 @@ document.getElementById('pplNameForm').addEventListener('submit', async function
     for(let key in data[0]){
         let p = document.createElement('p');
         p.textContent = `${key}:${data[0][key]}`
-        divarea.appendChild(p);
+        results.appendChild(p);
 
     }
 
+    let p = document.createElement('p');
+    message.innerHTML = '';
+    message.innerHTML = 'Search Successful'
+    
     }
     catch (error){
         console.log(error);
+        
     }
 
     
@@ -121,13 +143,18 @@ document.getElementById('pplNameForm').addEventListener('submit', async function
 })
 
 document.getElementById('pplLicenseForm').addEventListener('submit', async function (event){
-    event.preventDefault();
-    let divarea = document.getElementById('searchResults');
-    let srchInput = document.getElementById('pplLicSearch').value;
+    // event.preventDefault();
+    let results = document.getElementById('results');
+    let srchInput = document.getElementById('license').value;
     
    
     console.log('You typed: ' + srchInput);
  
+    if(srchInput == ''){
+        message.innerHTML = '';
+        message.innerHTML = 'Error';
+        return
+    }
     
    try{
     const { data, error } = await supabase
@@ -136,13 +163,15 @@ document.getElementById('pplLicenseForm').addEventListener('submit', async funct
     .eq('LicenseNumber', srchInput)
     console.log(data[0]);
 
-    divarea.innerHTML = '';
+    results.innerHTML = '';
 
 
     if(data[0] == undefined){
         let p = document.createElement('p');
         p.textContent = "No one was found with this license plate.";
-        divarea.appendChild(p);
+        message.innerHTML = '';
+        message.innerHTML = 'Error'
+        results.appendChild(p);
         return;
 
     }
@@ -151,9 +180,11 @@ document.getElementById('pplLicenseForm').addEventListener('submit', async funct
     {
     let p = document.createElement('p');
     p.textContent = `${key}: ${data[0][key]}`
-    divarea.appendChild(p);
+    results.appendChild(p);
     }
 
+    message.innerHTML = 'Search Successful';
+    
    }
   
    catch (error){

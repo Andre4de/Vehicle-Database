@@ -1,4 +1,4 @@
-.container
+#container
 {
     display: grid;
     grid-template-areas: 'header header header header header'
@@ -7,14 +7,14 @@
     
 }
 
-.header
+/* .header
 {
     grid-area: header;
     padding: 10px;
-    box-shadow: 0 0 0 4px black;
-    margin-bottom: 20px;
+    box-shadow: 0 0 0 1px black;
+    margin-bottom: 10px;
 
-}
+} */
 
 img
 {
@@ -27,19 +27,53 @@ img
 .sidebar
 {
     grid-area: sidebar;  
-    box-shadow: 0 0 0 4px black;
-    padding: 10px;
-    margin-right: 20px;
-    margin-bottom: 20px;
+    border: 1px solid black;
+
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 .main
 {
     grid-area: main;
     background-color: blanchedalmond;
-    padding: 10px;
-    box-shadow: 0 0 0 4px black;
-    margin-bottom: 20px;
+    border: 1px solid black;
+
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    
+    
+}
+
+
+header{
+    grid-area: header;
+
+    border: 1px solid black;
+
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
     
 }
 
@@ -51,8 +85,18 @@ img
 .footer
 {
    grid-area: footer; 
-   padding: 10px;
-   box-shadow: 0 0 0 4px black;
+
+   border: 1px solid black;
+
+   padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }
 
 

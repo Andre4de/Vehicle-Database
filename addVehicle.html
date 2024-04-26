@@ -11,7 +11,7 @@
 
     <body>
        
-          <div class="container">
+          <div id="container">
 
             <div class="header">
 
@@ -19,8 +19,8 @@
 
                     <nav>
                         <ul>
-                            <li><a href="index.html">People Page</a>        
-                            <li><a href="vehicle.html">Vehicle Page</a>   
+                            <li><a href="index.html">People Search</a>        
+                            <li><a href="vehicle.html">Vehicle Search</a>   
                             <li>Add a Vehicle  
                         </ul>
                     </nav>
@@ -28,18 +28,18 @@
 
             <div class="sidebar">
                 <h3>Sidebar</h3>
-                <img src="images/people_img.jpg">
+                <img src="images/people_img.jpg" id="img">
 
                 <form id="pplNameForm">
                     <label for="pplNameForm">Search by driver name:</label>
                     <input type="search" id="pplSearch" name="q" placeholder="Search...">
-                    <button type="submit" id="submitButton1">Search</button> 
+                    <button type="submit" id="submitButton1">Submit</button> 
                 </form>
 
                 <form id="pplLicenseForm">
                     <label for="pplLicenseForm">Search by driver license:</label>
                     <input type="search" id="pplLicSearch" name="z" placeholder="Search...">
-                    <button type="submit" id="submitButton2">Search</button> 
+                    <button type="submit" id="submitButton2">Submit</button> 
                 </form>
 
               
@@ -52,13 +52,14 @@
 
             <div class="main">
                 <h2>Main</h2>
-                <div id="searchResults"></div>
+                <div id="search"></div>
             </div>
 
             
 
             <div class="footer">
                 <h4>Footer</h4>
+                <div id="message"></div>
             </div>
 
           </div>

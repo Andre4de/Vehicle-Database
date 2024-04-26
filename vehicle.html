@@ -12,40 +12,42 @@
 
     <body>
        
-          <div class="container">
+          <div id="container">
 
-            <div class="header">
+            <!-- <div class="header"> -->
+                <header>
+                    <h1>Vehicle Search</h1>
 
-                <h1>My Vehicle Database</h1>
-
-                    <nav>
-                        <ul>
-                            <li><a href="index.html">People Page</a>        
-                            <li>Vehicle Page  
-                            <li><a href="addVehicle.html">Add a Vehicle</a> 
-                        </ul>
-                    </nav>
-            </div>
+                        <nav>
+                            <ul>
+                                <li><a href="index.html">People Search</a>        
+                                <li><a href=""> Vehicle Search  </a>
+                                <li><a href="addVehicle.html">Add a Vehicle</a> 
+                            </ul>
+                        </nav>
+                </header>
+            <!-- </div> -->
             
             <div class='sidebar'>
                 <h3>Sidebar</h3>
-                <img src='images/cars.jpg'>
+                <img src='images/cars.jpg' id="img">
 
                 <form id='vehicleSrchForm'>
                     <label for='vehicleSrchForm'>Search for license plate:</label>
                     <input type='search' id='vehSearch' name='w' placeholder='Search...'>
-                    <button type='submit' id='submitButton3'>Search</button>
+                    <button type='submit' id='submitButton3'>Submit</button>
                 </form>
 
             </div>
 
             <div class='main'>
                 <h2>Main</h2>
-                <div id='vehicleMain'></div>
+                <div id='results'></div>
             </div>
 
             <div class="footer">
                 <h4>Footer</h4>
+                <div id="message"></div>
             </div>
 
           </div>
@@ -63,21 +65,36 @@ const supabase = createClient('https://ugspricsaeopciltqhlf.supabase.co', 'eyJhb
 
 document.getElementById('vehicleSrchForm').addEventListener('submit', async function (event){
 event.preventDefault();
-let divarea2 = document.getElementById('vehicleMain');
+let results = document.getElementById('results');
 let srchInput = document.getElementById('vehSearch').value;
+let message = document.getElementById('message')
+
 console.log('You typed: ' + srchInput);
    
 try{
    
+    if(srchInput == ''){
+        message.innerHTML = '';
+        message.innerHTML = 'Error';
+        return
+    }
+
+
     const { data, error } = await supabase
-    .from('People')
-    .select(`
-    PersonID,
-    Vehicles!inner (
-        OwnerID
-    )
-    `)
-    .eq('LicenseNumber', srchInput)
+    .from('Vehicles')
+    .select()
+    .eq('VehicleID',srchInput)
+    
+
+   
+    
+
+
+// const { data, error } = await supabase.from('Vehicles').select(`
+
+//   People ( PeopleID )
+// `)
+// .eq('VehicleID',srchInput)
 
 
 // const { data, error } = await supabase
@@ -111,12 +128,14 @@ try{
 
     console.log(data[0]);
     
-    divarea2.innerHTML = '';
+    results.innerHTML = '';
 
     if(data[0] == undefined){
         let p = document.createElement('p');
         p.textContent = "No one was found with this name.";
-        divarea2.appendChild(p);
+        results.appendChild(p);
+        message.innerHTML = '';
+        message.innerHTML = 'Error';
         return;
 
     }
@@ -124,9 +143,11 @@ try{
     for(let key in data[0]){
         let p = document.createElement('p');
         p.textContent = `${key}:${data[0][key]}`
-        divarea2.appendChild(p);
+        results.appendChild(p);
 
     }
+    message.innerHTML = '';
+    message.innerHTML = 'Search Successful';
     if(error)
     console.log(error);
     }
