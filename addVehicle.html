@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US'">
+<html lang="en">
 
     <head>
         <meta charset="utf-8"/>
@@ -13,7 +13,7 @@
        
           <div id="container">
 
-            <div class="header">
+            <header>
 
                 <h1>Add a Vehicle </h1>
 
@@ -24,23 +24,15 @@
                             <li>Add a Vehicle  
                         </ul>
                     </nav>
-            </div>
+             </header>
 
             <div class="sidebar">
                 <h3>Sidebar</h3>
-                <img src="images/people_img.jpg" id="img">
+                <aside>
+                <img src="people_img.png" alt="image of vehicles" class="img">
+                 </aside>
 
-                <form id="pplNameForm">
-                    <label for="pplNameForm">Search by driver name:</label>
-                    <input type="search" id="pplSearch" name="q" placeholder="Search...">
-                    <button type="submit" id="submitButton1">Submit</button> 
-                </form>
-
-                <form id="pplLicenseForm">
-                    <label for="pplLicenseForm">Search by driver license:</label>
-                    <input type="search" id="pplLicSearch" name="z" placeholder="Search...">
-                    <button type="submit" id="submitButton2">Submit</button> 
-                </form>
+              
 
               
 
@@ -52,6 +44,17 @@
 
             <div class="main">
                 <h2>Main</h2>
+                <form id="pplNameForm">
+                    <label for="pplNameForm">Search by driver name:</label>
+                    <input type="search" id="pplSearch" name="q" placeholder="Search...">
+                    <button type="submit" id="submitButton1">Submit</button> 
+                </form>
+
+                <form id="pplLicenseForm">
+                    <label for="pplLicenseForm">Search by driver license:</label>
+                    <input type="search" id="pplLicSearch" name="z" placeholder="Search...">
+                    <button type="submit" id="submitButton2">Submit</button> 
+                </form>
                 <div id="search"></div>
             </div>
 

@@ -32,19 +32,11 @@
             
             <div class="sidebar">
                 <h3>Sidebar</h3>
-                <img src="images/people_img.jpg" id="img">
+                <aside>
+                <img src="people_img.png" class="img">
+                </aside>
 
-                <form id="pplNameForm">
-                    <label for="pplNameForm">Search by driver name:</label>
-                    <input type="search" id='name' name="q" placeholder="Search...">
-                    <button type="submit" id="submitButton1">Submit</button> 
-                </form>
-
-                <form id="pplLicenseForm">
-                    <label for="pplLicenseForm">Search by driver license:</label>
-                    <input type="search" id="license" name="z" placeholder="Search...">
-                    <button type="submit" id="submitButton2">Submit</button> 
-                </form>
+               
 
               
 
@@ -56,6 +48,20 @@
 
             <div class="main">
                 <h2>Main</h2>
+                <form id="input">
+                    <label for="input">Search by driver name:</label>
+                    <input type="search" id='name' name="name" placeholder="Search...">
+                    
+                    <br>
+
+                    <label for="pplLicenseForm">Search by driver license:</label>
+                    <input type="search" id="license" name="license" placeholder="Search...">
+
+                    <br>
+
+                    <button type="submit" id="click">Submit</button> 
+                    
+                </form>
                 <div id='results'></div>
                 
             </div>
@@ -85,27 +91,52 @@ const supabase = createClient('https://ugspricsaeopciltqhlf.supabase.co', 'eyJhb
 
 
 
-document.getElementById('pplNameForm').addEventListener('submit', async function (event){
-    // event.preventDefault();
+document.getElementById('input').addEventListener('submit', async function (event){
+    event.preventDefault();
     let results = document.getElementById('results');
-    let srchInput = document.getElementById('name').value;
+    let name = document.getElementById('name').value;
+    let license = document.getElementById('license').value;
     let message = document.getElementById('message');
-    console.log('You typed: ' + srchInput);
+    console.log('You typed: ' + name + license);
  
-    if(srchInput == ''){
+    if(name == '' && license == ''){
         message.innerHTML = '';
         message.innerHTML = 'Error';
         return
     }
 
+    if(license && name){
+        message.innerHTML = '';
+        message.innerHTML = 'Error';
+        return
+    }
+
+   
 
     try{
    
-    const { data, error } = await supabase
-    .from('People')
-    .select('*')
-    .eq('Name', srchInput)
-    console.log(data[0]);
+    const query = supabase.from('People').select('*')
+    // const query2 = supabase.from('People').select('*').eq('LicenseNumber', license)
+
+    
+
+    
+
+   
+    if(license){
+        query.eq('LicenseNumber', license); 
+        
+    }
+    if(name){
+        query.ilike('Name', `%${name}%`)
+
+    }
+
+   
+
+    const { data, error } = await query
+
+
 
     results.innerHTML = '';
     
@@ -116,21 +147,26 @@ document.getElementById('pplNameForm').addEventListener('submit', async function
         results.appendChild(p);
         let q = document.createElement('q')
         message.innerHTML = '';
-        message.innerHTML = 'Error'
+        message.innerHTML = 'No result found.'
         return;
 
     }
 
-    for(let key in data[0]){
+    for(let i in data){
+        let q = document.createElement('div')
+        results.appendChild(q)
+        q.classList.add("sqr");
+        for(let key in data[i]){
         let p = document.createElement('p');
-        p.textContent = `${key}:${data[0][key]}`
-        results.appendChild(p);
+        p.textContent = `${key}:${data[i][key]}`
+        q.appendChild(p);
+            }   
 
     }
 
     let p = document.createElement('p');
     message.innerHTML = '';
-    message.innerHTML = 'Search Successful'
+    message.innerHTML = 'Search successful'
     
     }
     catch (error){
@@ -142,55 +178,7 @@ document.getElementById('pplNameForm').addEventListener('submit', async function
     
 })
 
-document.getElementById('pplLicenseForm').addEventListener('submit', async function (event){
-    // event.preventDefault();
-    let results = document.getElementById('results');
-    let srchInput = document.getElementById('license').value;
-    
-   
-    console.log('You typed: ' + srchInput);
- 
-    if(srchInput == ''){
-        message.innerHTML = '';
-        message.innerHTML = 'Error';
-        return
-    }
-    
-   try{
-    const { data, error } = await supabase
-    .from('People')
-    .select('*')
-    .eq('LicenseNumber', srchInput)
-    console.log(data[0]);
 
-    results.innerHTML = '';
-
-
-    if(data[0] == undefined){
-        let p = document.createElement('p');
-        p.textContent = "No one was found with this license plate.";
-        message.innerHTML = '';
-        message.innerHTML = 'Error'
-        results.appendChild(p);
-        return;
-
-    }
-
-    for(let key in data[0])
-    {
-    let p = document.createElement('p');
-    p.textContent = `${key}: ${data[0][key]}`
-    results.appendChild(p);
-    }
-
-    message.innerHTML = 'Search Successful';
-    
-   }
-  
-   catch (error){
-    console.log(error);
-   }
-   });
 
 
           </script> 
