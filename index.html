@@ -49,12 +49,12 @@
             <div class="main">
                 <h2>Main</h2>
                 <form id="input">
-                    <label for="input">Search by driver name:</label>
+                    <label for="name">Search by driver name:</label>
                     <input type="search" id='name' name="name" placeholder="Search...">
                     
                     <br>
 
-                    <label for="pplLicenseForm">Search by driver license:</label>
+                    <label for="license">Search by driver license:</label>
                     <input type="search" id="license" name="license" placeholder="Search...">
 
                     <br>
@@ -116,7 +116,7 @@ document.getElementById('input').addEventListener('submit', async function (even
     try{
    
     const query = supabase.from('People').select('*')
-    // const query2 = supabase.from('People').select('*').eq('LicenseNumber', license)
+    const query2 = supabase.from('People').select('*').eq('LicenseNumber', license)
 
     
 
@@ -141,7 +141,7 @@ document.getElementById('input').addEventListener('submit', async function (even
     results.innerHTML = '';
     
     
-    if(data[0] == undefined){
+    if(data[0] === undefined){
         let p = document.createElement('p');
         p.textContent = 'No one was found with this name.';
         results.appendChild(p);
