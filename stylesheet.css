@@ -7,13 +7,8 @@
     
 }
 
-/* .header
-{
-    grid-area: header;
-    padding: 10px;
-    box-shadow: 0 0 0 1px black;
-    margin-bottom: 10px;
-
+/* #form2{
+    display: none;
 } */
 
 .img
@@ -23,6 +18,28 @@
     padding: 10px;
 
 }
+#results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+/* Individual result item styles */
+#results > div {
+    flex: 0 0 auto; /* Let them shrink as needed */
+    margin: 5px; /* Smaller margin */
+    background-color: #f9f9f9;
+    padding: 10px; /* Smaller padding */
+    box-sizing: border-box;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 500px) {
+    #results > div {
+        flex-basis: 100%; /* Occupy full width */
+    }
+}
+
 
 .sqr{
     
