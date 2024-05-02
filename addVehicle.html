@@ -35,36 +35,71 @@
   
             </div>
 
-            <div class="main">
+            <div class='main'>
                 <h2>Main</h2>
-                <form id="addVeh">
+                <form id="addVehicle">
 
-                    <label for="rego">License:</label>
-                    <input type="search" id="rego" name="rego" placeholder="Search...">
+                    <label for="carid">Vehicle ID:</label>
+                    <input type="search" id="rego" name="vehiclenum" placeholder="Search...">
                     
                      <br>
 
-                    <label for="make">Vehicle Make:</label>
-                    <input type="search" id="make" name="make" placeholder="Search...">
+                    <label for="carmake">Vehicle Make:</label>
+                    <input type="search" id="make" name="vehiclemake" placeholder="Search...">
 
                     <br>
 
-                    <label for="model">Vehicle Model:</label>
-                    <input type="search" id="model" name="model" placeholder="Search...">
+                    <label for="carmodel">Vehicle Model:</label>
+                    <input type="search" id="model" name="vehiclemodel" placeholder="Search...">
 
                     <br>
 
-                    <label for="colour">Vehicle Colour:</label>
-                    <input type="search" id="colour" name="colour" placeholder="Search...">
+                    <label for="carcolour">Vehicle Colour:</label>
+                    <input type="search" id="colour" name="vehiclecolour" placeholder="Search...">
 
                     <br>
 
-                    <label for="owner">Owner ID:</label>
-                    <input type="search" id="owner" name="owner" placeholder="Search...">
+                    <label for="carowner">Owner ID:</label>
+                    <input type="search" id="owner" name="vehicleowner" placeholder="Search...">
 
                     <br>
 
-                    <button type="submit" id="submitButton2">Add</button> 
+                    <button type="submit" id="click">Add</button> 
+
+                    <br>
+
+                </form>
+
+                 <form id="addVehicle">
+
+                    <label for="carid">Vehicle ID:</label>
+                    <input type="search" id="rego" name="vehiclenum" placeholder="Search...">
+                    
+                     <br>
+
+                    <label for="carmake">Vehicle Make:</label>
+                    <input type="search" id="make" name="vehiclemake" placeholder="Search...">
+
+                    <br>
+
+                    <label for="carmodel">Vehicle Model:</label>
+                    <input type="search" id="model" name="vehiclemodel" placeholder="Search...">
+
+                    <br>
+
+                    <label for="carcolour">Vehicle Colour:</label>
+                    <input type="search" id="colour" name="vehiclecolour" placeholder="Search...">
+
+                    <br>
+
+                    <label for="carowner">Owner ID:</label>
+                    <input type="search" id="owner" name="vehicleowner" placeholder="Search...">
+
+                    <br>
+
+                    <button type="submit" id="click">Add</button> 
+
+                    <br>
 
                 </form>
 
@@ -85,187 +120,129 @@
 
             import { createClient } from
                'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-            // Create a single supabase client for interacting with your database
-            
-            
-            
-            
-            
-            const supabase = createClient('https://ugspricsaeopciltqhlf.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnc3ByaWNzYWVvcGNpbHRxaGxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTIyNTYyMjAsImV4cCI6MjAyNzgzMjIyMH0.tXrrGVvxsy5yKal2ROjrDUNWqHbabRehpfI35-MF1vQ')
-            
-            document.getElementById('addVeh').addEventListener('submit', async function (event){
-            event.preventDefault();
-            let message = document.getElementById('message');
-            let results = document.getElementById('results');
-            let rego = document.getElementById('rego').value;
-            let make = document.getElementById('make').value;
-            let model = document.getElementById('model').value
-            let colour = document.getElementById('colour').value;
-            let owner = document.getElementById('owner').value;
-           
-            
-            console.log('rego: ' + rego);
-            console.log('make: ' + make);
-            console.log('model: ' + model);
-            console.log('colour: ' + colour);
-            console.log('owner: ' + owner);
+   
+            const supabase = createClient('https://ugspricsaeopciltqhlf.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVnc3ByaWNzYWVvcGNpbHRxaGxmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTIyNTYyMjAsImV4cCI6MjAyNzgzMjIyMH0.tXrrGVvxsy5yKal2ROjrDUNWqHbabRehpfI35-MF1vQ');
+                let results = document.getElementById("results");
+                const newform = document.createElement("form")
+                
+                newform.id = 'newForm';
 
-            if(rego === ''|| make === '' ||model === '' || colour === '' || owner === ''){
+                const prsnid = document.createElement("label")
+                prsnid.setAttribute('for', 'personid')
+                prsnid.textContent = "personID: ";
+                const personID = document.createElement("input")
+                personID.type = "search"
+                personID.id = "personid"
+                personID.name = "Personid"
+                personID.placeholder = "add"
+
+               
+
+                
+
+                let subBut = document.createElement("button")
+                subBut.type = "submit"
+                subBut.id = "subHello"
+                subBut.textContent = "Say Hello"
+
+            document.getElementById("addVehicle").addEventListener("submit", async function (event){
+                event.preventDefault();
+
+                
+                
+                
+                
+                let reg = document.getElementById("rego").value
+                let mke = document.getElementById("make").value
+                let mdl = document.getElementById("model").value
+                let clr = document.getElementById("colour").value
+                let ownerid = document.getElementById("owner").value
+
+                if(reg === ''|| mke === '' ||mdl === '' || clr === '' || ownerid === ''){
                 message.innerHTML = '';
                 message.innerHTML = 'Error';
                 return;
             }
-            
+
+                console.log("Html action listener works")
+                console.log(ownerid)
+
+                try{
+
+                const query = supabase.from("Vehicles").select("OwnerID").eq("OwnerID", ownerid);
+
+                let { data: checkPpl, error : vehErr } = await query;
+
+                if(vehErr)
+                throw vehErr
+
+                if(checkPpl.length === 0){
+                console.log("No one there")
+
+ 
+                results.appendChild(newform)
+                newform.appendChild(prsnid)
+                newform.appendChild(personID)
+                newform.appendChild(subBut)
+
                
-            try{
-                const query1 = supabase.from('People').select('PersonID').eq('PersonID', owner);
-                const query2 = supabase.from('Vehicles').insert({ VehicleID: rego, Make: make, Model: model, Colour: colour, OwnerID: owner})
-       
-                const { data: people, error: peopleErr} = await query1
-
-                if(peopleErr)
-                throw peopleErr
-
-                console.log(people[0]);
-
-                if(people.length === 0){
-                console.log("Owner was not found")
-
-                // let newDivArea = document.createElement('div')
-                let newFrm = document.createElement('form')
-                newFrm.setAttribute('id', 'newForm')
-                results.appendChild(newFrm)
-
-                let prsnID = document.createElement('label')
-                prsnID.textContent = 'personID: '
-                let prsnIDInput = document.createElement('input')
-                prsnIDInput.setAttribute('type','search')
-                prsnIDInput.setAttribute('id','personID')
-                prsnIDInput.setAttribute('placeholder','create')
-                prsnIDInput.setAttribute('name','prsnID')
-                newFrm.appendChild(prsnID)
-                newFrm.appendChild(prsnIDInput)
-                newFrm.appendChild(document.createElement('br'))
-
-                let nme = document.createElement('label')
-                nme.textContent = 'name: '
-                let nmeInput = document.createElement('input')
-                nmeInput.setAttribute('type','search')
-                nmeInput.setAttribute('id','name')
-                nmeInput.setAttribute('placeholder','create')
-                nmeInput.setAttribute('name','name')
-                newFrm.appendChild(nme)
-                newFrm.appendChild(nmeInput)
-                newFrm.appendChild(document.createElement('br'))
-
-                let addr = document.createElement('label')
-                addr.textContent = 'address: '
-                let addrInput = document.createElement('input')
-                addrInput.setAttribute('type','search')
-                addrInput.setAttribute('id','address')
-                addrInput.setAttribute('placeholder','create')
-                addrInput.setAttribute('name','address')
-                newFrm.appendChild(addr)
-                newFrm.appendChild(addrInput)
-                newFrm.appendChild(document.createElement('br'))
-
-                let db = document.createElement('label')
-                db.textContent = 'dob: '
-                let dbInput = document.createElement('input')
-                dbInput.setAttribute('type','search')
-                dbInput.setAttribute('id','dob')
-                dbInput.setAttribute('placeholder','create')
-                dbInput.setAttribute('name','dob')
-                newFrm.appendChild(db)
-                newFrm.appendChild(dbInput)
-                newFrm.appendChild(document.createElement('br'))
-
-                let lic = document.createElement('label')
-                lic.textContent = 'license: '
-                let licInput = document.createElement('input')
-                licInput.setAttribute('type','search')
-                licInput.setAttribute('id','license')
-                licInput.setAttribute('placeholder','create')
-                licInput.setAttribute('name','license')
-                newFrm.appendChild(lic)
-                newFrm.appendChild(licInput)
-                newFrm.appendChild(document.createElement('br'))
-
-                let exp = document.createElement('label')
-                exp.textContent = 'expire: '
-                let expInput = document.createElement('input')
-                expInput.setAttribute('type','search')
-                expInput.setAttribute('id','expire')
-                expInput.setAttribute('placeholder','create')
-                expInput.setAttribute('name','expire')
-                newFrm.appendChild(exp)
-                newFrm.appendChild(expInput)
-                newFrm.appendChild(document.createElement('br'))
-
-                let newBtn = document.createElement('button')
-                newBtn.type = 'submit'
-                newBtn.setAttribute('id','click')
-                newBtn.textContent = 'Submit'
-                newFrm.appendChild(newBtn)
-
-                let personIDin = document.getElementById('personID')
-                let namein = document.getElementById('name')
-                let addressin = document.getElementById('address')
-                let dobin = document.getElementById('dob')
-                let licensein = document.getElementById('license')
-                let expirein = document.getElementById('expire')
 
 
+                
 
-                console.log(newFrm.id)
+                }else{
+                  
+                    console.log("A person with that id already exists.")
 
+                    const query2 = supabase.from('Vehicles').insert({ VehicleID: reg, Make: mke, Model: mdl, Colour: clr, OwnerID: ownerid})
 
-                document.getElementById('newForm').addEventListener('submit ', async function (event){
-                   
-                    console.log(personIDin)
+                    const { error: vehIn} = await query2
+
+                    if(vehIn)
+                    throw vehin
+
                     
-
-                   
-
-                })
-
-
-                // message.innerHTML = ''
-                // message.innerHTML = 'Error'
-                // throw new Error('Owner not found')
                 }
 
-                
-                 
-                // const { error: vehicle } = await query2
-                // if(vehicle)
-                // throw new Error
-                
-                
-            
-                
-            
-               
-            
 
-                message.innerHTML = '';
-                message.innerHTML = 'Vehicle successfully added.';
-            }
-                catch (error){
-                    console.log(error);
+            }catch(error){
+                console.log(error)
+            }  
 
-                    if (error instanceof WebSocketError) {
-                    message.innerHTML = 'WebSocket error occurred. Please try again later.';
-                } else {
-                    message.innerHTML = 'An error occurred. Please try again later.';
-                }
-            }
-                
-                
-                
+            document.getElementById("newForm").addEventListener("submit", async function (event){
+                    event.preventDefault();
                     
-                    
+                    ownerid = document.getElementById("personid").value
+
+
+                    console.log("namein")
+
+                    console.log("Nested hello world!");
+                    console.log(ownerid)
+
+                    const query3 = supabase.from('People').insert({ PersonID: ownerid, Name: "Andre", Address: "Coventry", DOB: "July", LicenseNumber: "4567", ExpiryDate: "2003"})
+                    const query4 = supabase.from('Vehicles').insert({ VehicleID: "anything", Make: "Toyota", Model: "Yaris", Colour: "Black", OwnerID: ownerid})
+                    try{
+                            const { error : personErr } = await query3
+
+                            if(personErr)
+                            throw personErr
+
+                            const { error : vehin2} = await query4
+
+                            if(vehin2)
+                            throw vehin2
+                    }
+                    catch(error)
+                    {
+                            console.log(error)
+                    }
                 });
+
+
+            });
+            
+                
                       </script> 
                       
                 </body>
