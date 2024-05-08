@@ -1,0 +1,14 @@
+{
+  "name": "andre4de.github.io",
+  "version": "1.0.0",
+  "description": "Hello, this repo is for the HTML/CSS/JavaScript Module. I am tasked to use GitHub pages to devlop the Front and Back end of a WebSite which queries data.",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.43.1",
+    "@types/node": "^20.12.8"
+  }
+}
