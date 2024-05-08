@@ -116,7 +116,7 @@ document.getElementById('input').addEventListener('submit', async function (even
     try{
    
     const query = supabase.from('People').select('*')
-    const query2 = supabase.from('People').select('*').eq('LicenseNumber', license)
+    // const query2 = supabase.from('People').select('*').eq('LicenseNumber', license)
 
     
 

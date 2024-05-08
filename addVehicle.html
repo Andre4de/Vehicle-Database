@@ -59,7 +59,7 @@
 
                     <br>
 
-                    <label for="carowner">Owner ID:</label>
+                    <label for="carowner">Name:</label>
                     <input type="search" id="owner" name="vehicleowner" placeholder="Search...">
 
                     <br>
@@ -74,8 +74,8 @@
 
                 <form id="form2">
 
-                <label for="pID">personid :</label>
-                <input type="search" id="personid" name="pID" placeholder="Search...">
+                <label for="personid">personid :</label>
+                <input type="search" id="personid" name="personid" placeholder="Search...">
                 
                     <br>
 
@@ -119,7 +119,7 @@
 
             <div class="footer">
                 <h4>Footer</h4>
-                <div id="message"></div>
+                <p id="message"></p>
             </div>
 
           </div>
@@ -154,7 +154,7 @@
 
                 try{
 
-                const query = supabase.from("Vehicles").select("OwnerID").eq("OwnerID", owneridI);
+                const query = supabase.from('People').select('*').ilike('Name', `%${owneridI}%`)
 
                 let { data: checkPpl, error : vehErr } = await query;
 
@@ -193,7 +193,7 @@
                 const { error: vehIn} = await query4
                 
                 
-                message.textContent = "Vehicle added successfully";
+                message.innerHTML = "Vehicle added successfully";
 
                 document.getElementById("form2").style.display = "none";
 
@@ -208,7 +208,7 @@
                 
 
                 }else{
-                  
+                
                     console.log("A person with that id already exists.")
 
                     const query2 = supabase.from('Vehicles').insert({ VehicleID: regoI, Make: makeI, Model: modelI, Colour: colourI, OwnerID: owneridI})
@@ -216,7 +216,7 @@
                     const { error: vehIn} = await query2
 
                     
-                    message.textContent = "Vehicle added successfully";
+                    message.innerHTML = "Vehicle added successfully";
 
                     
 
