@@ -238,27 +238,33 @@ document.getElementById("addVehicle").addEventListener("submit", async function 
     message.innerHTML = "Vehicle added successfully";
 
     document.getElementById("form2").style.display = "none";
-
-    });
     return
-
-    
-
-   
-
-
-    
+    });
 
     }else{
     
         console.log("A person with that id already exists.")
-
-        const query2 = supabase.from('Vehicles').insert({ VehicleID: regoI, Make: makeI, Model: modelI, Colour: colourI, OwnerID: owneridI})
-
-        const { error: vehIn} = await query2
+        const query5 = supabase.from('People').select('PersonID').eq('Name', owneridI)
 
         
+
+        const {data, error} = await query5
+        if(error)
+            throw new Error(error)
+
+
+        console.log(data[0].PersonID)
+        
+        const query2 = supabase.from('Vehicles').insert({ VehicleID: regoI, Make: makeI, Model: modelI, Colour: colourI, OwnerID: data[0].PersonID})
+        
+        const {error : error2} = await query2
+
+
+
         message.innerHTML = "Vehicle added successfully";
+
+
+        return
 
         
 
