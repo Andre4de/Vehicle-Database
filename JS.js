@@ -196,7 +196,7 @@ document.getElementById("addVehicle").addEventListener("submit", async function 
 
     try{
 
-    const query = supabase.from('People').select('*').ilike('Name', `%${owneridI}%`)
+    const query = supabase.from('People').select('*').eq('Name', owneridI)
 
     let { data: checkPpl, error : vehErr } = await query;
 
@@ -224,9 +224,23 @@ document.getElementById("addVehicle").addEventListener("submit", async function 
         return;
     }
 
+    
+
+
     const query3 = supabase.from('People').insert({ PersonID: personidI, Name: nameI, Address: addressI, DOB: dobI, LicenseNumber: licenseI, ExpiryDate: expireI})
+    const query6 = supabase.from('People').select('PersonID').eq('PersonID', personidI)
+
+    const { data : checkPerson, error : checkPersonError } = await query6
+
+    if(checkPerson.length != 0){
+        console.log("A person with that id already exists.")
+        message.innerHTML = "Error";
+        return
+    }
 
     const { error: pplIn} = await query3
+
+    
 
     owneridI = personidI
 
